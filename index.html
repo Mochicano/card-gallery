@@ -14,26 +14,28 @@
 
       --charizard1: #fac;
       --charizard2: #ddccaa;
-      --charizardfront: url(https://i.pinimg.com/736x/c5/fe/1f/c5fe1fbdf0fe286d04ddcd65285b1895.jpg);
+      --charizardfront: url(https://i.pinimg.com/736x/35/ca/32/35ca32abb63da8220873970a391d6876.jpg);
 
       --pika1: #54a29e;
       --pika2: #a79d66;
-      --pikafront: url(https://i.pinimg.com/736x/35/ca/32/35ca32abb63da8220873970a391d6876.jpg);
+      --pikafront: url(https://i.pinimg.com/736x/c5/fe/1f/c5fe1fbdf0fe286d04ddcd65285b1895.jpg);
 
       --eevee1: #efb2fb;
       --eevee2: #acc6f8;
-      --eeveefront: url(https://i.pinimg.com/736x/84/ee/cf/84eecf5f122dbd313afd14e04df750ba.jpg);
+      --eeveefront: url(https://i.pinimg.com/736x/4c/5c/cd/4c5ccdb6ac660c4ecf89e41e05e1ddfd.jpg);
 
       /* You referenced these but never defined them */
       --mewtwo1: #8f8cff;
       --mewtwo2: #f4a6ff;
-      --mewtwofront: url(https://i.pinimg.com/736x/4c/5c/cd/4c5ccdb6ac660c4ecf89e41e05e1ddfd.jpg);
-
-      --camandradi1: #8f8cff;
-      --camandradi2: #f4a6ff;
-      --camandradifront: url(https://i.pinimg.com/736x/7e/82/c4/7e82c49c968d4500c16ad192e2a0259e.jpg);
+      --mewtwofront: url(https://i.pinimg.com/736x/7e/82/c4/7e82c49c968d4500c16ad192e2a0259e.jpg);
+      
+      --camandradi1: #54a29e;
+      --camandradi2: #a79d66;
+      --camandradifront: url();
       
     }
+    
+
 
     html, body {
       height: 100%;
@@ -128,10 +130,11 @@
         0 55px 35px -20px rgba(0, 0, 0, 0.5);
     }
 
-    .card.charizard   { --color1: var(--charizard1); --color2: var(--charizard2); --front: var(--charizardfront); }
-    .card.pika        { --color1: var(--pika1);      --color2: var(--pika2);      --front: var(--pikafront); }
-    .card.mewtwo      { --color1: var(--mewtwo1);    --color2: var(--mewtwo2);    --front: var(--mewtwofront); }
+    .card.charizard { --color1: var(--charizard1); --color2: var(--charizard2); --front: var(--charizardfront); }
+    .card.pika     { --color1: var(--pika1);      --color2: var(--pika2);      --front: var(--pikafront); }
+    .card.mewtwo   { --color1: var(--mewtwo1);    --color2: var(--mewtwo2);    --front: var(--mewtwofront); }
     .card.camandradi  { --color1: var(--camandradi1); --color2: var(--camandradi2); --front: var(--camandradifront); }
+
     .card.eevee    {
       --color1: #ec9bb6;
       --color2: #ccac6f;
@@ -139,7 +142,6 @@
       --color4: #8ec5d6;
       --color5: #b98cce;
       --front: var(--eeveefront);
-      
     }
 
     .card::before,
@@ -296,10 +298,10 @@
 <br>
 
  <section class="cards">
-      <div class="three-d-wrapper"><div class="card camandradi animated"></div></div>
-      <div class="three-d-wrapper"><div class="card pika animated"></div></div>
-      <div class="three-d-wrapper"><div class="card eevee animated"></div></div>
-      <div class="three-d-wrapper"><div class="card mewtwo animated"></div></div>
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
     </section>
 
   </main>
