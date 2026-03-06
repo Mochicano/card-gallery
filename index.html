@@ -33,6 +33,14 @@
       --yulan2: #a79d66;
       --yulanfront: url(https://i.pinimg.com/736x/5b/be/88/5bbe884265489d1bf248ff6910785bcd.jpg);
       
+      --lilian1: #54a29e;
+      --lilian2: #a79d66;
+      --lilianfront: url(https://i.pinimg.com/736x/e6/c6/c6/e6c6c66365940cc87decc650d1a4fc3d.jpg);
+      
+      --jack1: #54a29e;
+      --jack2: #a79d66;
+      --jackfront: url(https://i.pinimg.com/736x/12/66/b4/1266b42d3c237092a2bc6b2979f2d460.jpg);
+      
     }
     
 
@@ -60,6 +68,8 @@
       position: relative;
       min-height: 100%;
     }
+
+
 
     .cards {
       display: flex;
@@ -135,6 +145,8 @@
     .card.mewtwo      { --color1: var(--mewtwo1);    --color2: var(--mewtwo2);    --front: var(--mewtwofront); }
     .card.camandradi  { --color1: var(--camandradi1); --color2: var(--camandradi2); --front: var(--camandradifront); }
     .card.yulan       { --color1: var(--yulan1); --color2: var(--yulan2); --front: var(--yulanfront); }
+    .card.lilian       { --color1: var(--lilian1); --color2: var(--lilian2); --front: var(--lilianfront); }
+    .card.jack       { --color1: var(--jack1); --color2: var(--jack2); --front: var(--jackfront); }
     .card.eevee    {
       --color1: #ec9bb6;
       --color2: #ccac6f;
@@ -299,14 +311,23 @@
 
  <section class="cards">
       <div class="three-d-wrapper"><div class="card yulan animated"></div></div>
+      <div class="three-d-wrapper"><div class="card lilian animated"></div></div>
+      <div class="three-d-wrapper"><div class="card jack animated"></div></div>
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
+    </section>
+
+<br>
+<br>    
+    
+     <section class="cards">
+      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
       <div class="three-d-wrapper"><div class="card blank animated"></div></div>
       <div class="three-d-wrapper"><div class="card blank animated"></div></div>
       <div class="three-d-wrapper"><div class="card blank animated"></div></div>
     </section>
 
 <br>
-<br>
-
+<br>    
     
   </main>
 
