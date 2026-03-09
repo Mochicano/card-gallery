@@ -1,37 +1,40 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The March Hotel Card Gallery</title>
 
-  <!-- jQuery (required for your JS) -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <style>
     :root {
-      --color1: rgb(0, 231, 255);
-      --color2: rgb(255, 0, 231);
+      --card-back: url("https://i.pinimg.com/736x/32/39/46/3239466c78eb29049c46e893de0b542e.jpg");
 
-      --charizard1: #fac;
+      --charizardfront: url("https://i.pinimg.com/736x/35/ca/32/35ca32abb63da8220873970a391d6876.jpg");
+      --pikafront: url("https://i.pinimg.com/736x/c5/fe/1f/c5fe1fbdf0fe286d04ddcd65285b1895.jpg");
+      --eeveefront: url("https://i.pinimg.com/736x/b4/90/94/b49094cd5af74dbdb19251c6e1887660.jpg");
+      --mewtwofront: url("https://i.pinimg.com/736x/7e/82/c4/7e82c49c968d4500c16ad192e2a0259e.jpg");
+      --yulanfront: url(https://i.pinimg.com/736x/5b/be/88/5bbe884265489d1bf248ff6910785bcd.jpg);
+
+      --charizard1: #ff9ad0;
       --charizard2: #ddccaa;
-      --charizardfront: url(https://i.pinimg.com/736x/35/ca/32/35ca32abb63da8220873970a391d6876.jpg);
 
       --pika1: #54a29e;
       --pika2: #a79d66;
-      --pikafront: url(https://i.pinimg.com/736x/c5/fe/1f/c5fe1fbdf0fe286d04ddcd65285b1895.jpg);
 
-      --eevee1: #efb2fb;
-      --eevee2: #acc6f8;
-      --eeveefront: url(https://i.pinimg.com/736x/b4/90/94/b49094cd5af74dbdb19251c6e1887660.jpg);
+      --eevee1: #ec9bb6;
+      --eevee2: #ccac6f;
+      --eevee3: #69e4a5;
+      --eevee4: #8ec5d6;
+      --eevee5: #b98cce;
 
-      /* You referenced these but never defined them */
       --mewtwo1: #8f8cff;
       --mewtwo2: #f4a6ff;
-      --mewtwofront: url(https://i.pinimg.com/736x/7e/82/c4/7e82c49c968d4500c16ad192e2a0259e.jpg);
-      
+
       --yulan1: #54a29e;
       --yulan2: #a79d66;
-      --yulanfront: url(https://i.pinimg.com/736x/5b/be/88/5bbe884265489d1bf248ff6910785bcd.jpg);
+     
       
       --lilian1: #54a29e;
       --lilian2: #a79d66;
@@ -64,96 +67,90 @@
       --ran1: #54a29e;
       --ran2: #a79d66;
       --ranfront: url(https://i.pinimg.com/736x/6e/49/c1/6e49c1debbf4767a78460e7711c7dc09.jpg);
-
-
-
-      
-    }
-    
-
-
-    html, body {
-      height: 100%;
-      background-color: #333844;
-      padding: 0;
-      margin: 0;
-      transform: translate3d(0,0,0.1px);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
     body {
-      color: white;
-      font-family: "Heebo", sans-serif;
-      text-align: center;
+      margin: 0;
+      min-height: 100%;
+      background: #333844;
+      color: #fff;
+      font-family: "Heebo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
     }
 
-    h1 {
-      display: block;
-      margin: 30px 0;
+    body.zoom-active {
+      overflow: hidden;
     }
 
     #app {
+      min-height: 100vh;
+      padding: 24px 16px 48px;
       position: relative;
-      min-height: 100%;
+      z-index: 1;
     }
 
-
+    h1 {
+      margin: 10px 0 28px;
+      text-align: center;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+    }
 
     .cards {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
+      gap: 20px;
       position: relative;
       z-index: 1;
     }
 
-    @media screen and (min-width: 600px) {
+    @media (min-width: 700px) {
       .cards {
         flex-direction: row;
+        flex-wrap: wrap;
+        gap: 28px;
       }
     }
 
-    .cards .three-d-wrapper {
-      perspective: 750px;
-      isolation: isolate;
-      transform: translate3d(0.1px, 0.1px, 0.1px);
+    .three-d-wrapper {
+      perspective: 1200px;
     }
 
     .card {
+      position: relative;
       width: 71.5vw;
       height: 100vw;
-
-      position: relative;
-      overflow: hidden;
-      margin: 20px;
-      z-index: 10;
-      touch-action: none;
-      isolation: isolate;
-
+      max-width: 290px;
+      max-height: 405px;
+      min-width: 220px;
+      min-height: 308px;
       border-radius: 5% / 3.5%;
+      cursor: pointer;
+      user-select: none;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      will-change: transform;
+      transition: transform 0.4s linear, box-shadow 0.12s ease;
       box-shadow:
         -5px -5px 5px -5px var(--color1),
         5px 5px 5px -5px var(--color2),
         -7px -7px 10px -5px transparent,
         7px 7px 10px -5px transparent,
-        0 0 5px 0px rgba(255,255,255,0),
-        0 55px 35px -20px rgba(0, 0, 0, 0.5);
-
-      transition: transform 0.5s ease, box-shadow 0.2s ease;
-      will-change: transform, filter;
-
-      background-color: #040712;
-      background-image: var(--front);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
-      transform-origin: center;
+        0 0 5px 0 rgba(255,255,255,0),
+        0 55px 35px -20px rgba(0,0,0,0.5);
     }
 
-    @media screen and (min-width: 600px) {
+    @media (min-width: 900px) {
       .card {
-        width: clamp(12.9vw, 61vh, 18vw);
-        height: clamp(18vw, 85vh, 25.2vw);
+        width: clamp(220px, 18vw, 290px);
+        height: clamp(308px, 25.2vw, 405px);
       }
     }
 
@@ -164,43 +161,127 @@
         -7px -7px 10px -5px var(--color1),
         7px 7px 10px -5px var(--color2),
         0 0 13px 4px rgba(255,255,255,0.3),
-        0 55px 35px -20px rgba(0, 0, 0, 0.5);
+        0 55px 35px -20px rgba(0,0,0,0.5);
     }
 
-    .card.charizard   { --color1: var(--charizard1); --color2: var(--charizard2); --front: var(--charizardfront); }
-    .card.pika        { --color1: var(--pika1);      --color2: var(--pika2);      --front: var(--pikafront); }
-    .card.mewtwo      { --color1: var(--mewtwo1);    --color2: var(--mewtwo2);    --front: var(--mewtwofront); }
-    .card.camandradi  { --color1: var(--camandradi1); --color2: var(--camandradi2); --front: var(--camandradifront); }
-    .card.yulan       { --color1: var(--yulan1); --color2: var(--yulan2); --front: var(--yulanfront); }
-    .card.lilian      { --color1: var(--lilian1); --color2: var(--lilian2); --front: var(--lilianfront); }
-    .card.jack        { --color1: var(--jack1); --color2: var(--jack2); --front: var(--jackfront); }
-    .card.aj          { --color1: var(--aj1); --color2: var(--aj2); --front: var(--ajfront); }
-    .card.mech          { --color1: var(--mech1); --color2: var(--mech2); --front: var(--mechfront); }
-    .card.ayla          { --color1: var(--ayla1); --color2: var(--ayla2); --front: var(--aylafront); }
-    .card.harmony          { --color1: var(--harmony1); --color2: var(--harmony2); --front: var(--harmonyfront); }
-    .card.bat          { --color1: var(--bat1); --color2: var(--bat2); --front: var(--batfront); }
-    .card.ran          { --color1: var(--ran1); --color2: var(--ran2); --front: var(--ranfront); }
-    .card.eevee       {
-      --color1: #ec9bb6;
-      --color2: #ccac6f;
-      --color3: #69e4a5;
-      --color4: #8ec5d6;
-      --color5: #b98cce;
+    .card.charizard {
+      --front: var(--charizardfront);
+      --color1: var(--charizard1);
+      --color2: var(--charizard2);
+    }
+
+    .card.pika {
+      --front: var(--pikafront);
+      --color1: var(--pika1);
+      --color2: var(--pika2);
+    }
+
+    .card.eevee {
       --front: var(--eeveefront);
+      --color1: var(--eevee1);
+      --color2: var(--eevee2);
+      --color3: var(--eevee3);
+      --color4: var(--eevee4);
+      --color5: var(--eevee5);
     }
 
-    .card::before,
-    .card::after {
+    .card.mewtwo {
+      --front: var(--mewtwofront);
+      --color1: var(--mewtwo1);
+      --color2: var(--mewtwo2);
+    }
+
+    .card.yulan {
+      --front: var(--yulanfront);
+      --color1: var(--yulan1);
+      --color2: var(--yulan2);
+    }
+
+    .card.lilian {
+      --front: var(--lilianfront);
+      --color1: var(--lilian1);
+      --color2: var(--lilian2);
+    }
+
+    .card.jack {
+      --front: var(--jackfront);
+      --color1: var(--jack1);
+      --color2: var(--jack2);
+    }
+
+    .card.aj {
+      --front: var(--ajfront);
+      --color1: var(--aj1);
+      --color2: var(--aj2);
+    }
+
+    .card.mech {
+      --front: var(--mechfront);
+      --color1: var(--mech1);
+      --color2: var(--mech2);
+    }
+
+    .card.ayla {
+      --front: var(--aylafront);
+      --color1: var(--ayla1);
+      --color2: var(--ayla2);
+    }
+
+    .card.harmony {
+      --front: var(--harmonyfront);
+      --color1: var(--harmony1);
+      --color2: var(--harmony2);
+    }
+
+    .card.bat {
+      --front: var(--batfront);
+      --color1: var(--bat1);
+      --color2: var(--bat2);
+    }
+
+    .card.ran {
+      --front: var(--ranfront);
+      --color1: var(--ran1);
+      --color2: var(--ran2);
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      transform-style: preserve-3d;
+    }
+
+    .card-front {
+      transform: rotateY(0deg);
+      background-image: var(--front);
+      background-color: #040712;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background-image: var(--card-back);
+      background-color: #040712;
+    }
+
+    .card-front::before,
+    .card-front::after {
       content: "";
       position: absolute;
       inset: 0;
-      background-repeat: no-repeat;
-      opacity: .5;
+      pointer-events: none;
+      border-radius: inherit;
       mix-blend-mode: color-dodge;
-      transition: all .33s ease;
+      transition: all 0.2s ease;
     }
 
-    .card::before {
+    .card-front::before {
       background-position: 50% 50%;
       background-size: 300% 300%;
       background-image: linear-gradient(
@@ -212,40 +293,38 @@
         var(--color2) 75%,
         transparent 100%
       );
-      opacity: .5;
-      filter: brightness(.5) contrast(1);
+      opacity: 0.5;
+      filter: brightness(0.5) contrast(1);
       z-index: 1;
     }
 
-    .card::after {
-      opacity: .75;
+    .card-front::after {
+      opacity: 0.75;
       background-image:
         url("https://assets.codepen.io/13471/sparkles.gif"),
         url("https://assets.codepen.io/13471/holo.png"),
-        linear-gradient(125deg, #ff008450 15%, #fca40040 30%, #ffff0030 40%, #00ff8a20 60%, #00cfff40 70%, #cc4cfa50 85%);
+        linear-gradient(
+          125deg,
+          #ff008450 15%,
+          #fca40040 30%,
+          #ffff0030 40%,
+          #00ff8a20 60%,
+          #00cfff40 70%,
+          #cc4cfa50 85%
+        );
       background-position: 50% 50%;
       background-size: 160%;
       background-blend-mode: overlay;
-      z-index: 2;
       filter: brightness(1) contrast(1);
-      mix-blend-mode: color-dodge;
-      transition: all .33s ease;
     }
 
-    .card.active::after,
-    .card:hover::after {
-      filter: brightness(1) contrast(1);
+    .card.active .card-front::after,
+    .card:hover .card-front::after {
       opacity: 1;
     }
 
-    .card.active,
-    .card:hover {
-      animation: none;
-      transition: box-shadow 0.1s ease-out;
-    }
-
-    .card.active::before,
-    .card:hover::before {
+    .card.active .card-front::before,
+    .card:hover .card-front::before {
       background-image: linear-gradient(
         110deg,
         transparent 25%,
@@ -255,62 +334,13 @@
       );
       background-position: 50% 50%;
       background-size: 250% 250%;
-      opacity: .88;
-      filter: brightness(.66) contrast(1.33);
+      opacity: 0.88;
+      filter: brightness(0.66) contrast(1.33);
       transition: none;
     }
 
-    .card.animated { transition: none; animation: holoCard 12s ease 0s 1; }
-    .card.animated::before { transition: none; animation: holoGradient 12s ease 0s 1; }
-    .card.animated::after  { transition: none; animation: holoSparkle 12s ease 0s 1; }
-
-    @keyframes holoSparkle {
-      0%, 100% { opacity: .75; background-position: 50% 50%; filter: brightness(1.2) contrast(1.25); }
-      5%, 8%   { opacity: 1;   background-position: 40% 40%; filter: brightness(.8) contrast(1.2); }
-      13%, 16% { opacity: .5;  background-position: 50% 50%; filter: brightness(1.2) contrast(.8); }
-      35%, 38% { opacity: 1;   background-position: 60% 60%; filter: brightness(1) contrast(1); }
-      55%      { opacity: .33; background-position: 45% 45%; filter: brightness(1.2) contrast(1.25); }
-    }
-
-    @keyframes holoGradient {
-      0%, 100% { opacity: 0.5; background-position: 50% 50%; filter: brightness(.5) contrast(1); }
-      5%, 9%   { background-position: 100% 100%; opacity: 1; filter: brightness(.75) contrast(1.25); }
-      13%, 17% { background-position: 0% 0%; opacity: .88; }
-      35%, 39% { background-position: 100% 100%; opacity: 1; filter: brightness(.5) contrast(1); }
-      55%      { background-position: 0% 0%; opacity: 1; filter: brightness(.75) contrast(1.25); }
-    }
-
-    @keyframes holoCard {
-      0%, 100% { transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg); }
-      5%, 8%   { transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg); }
-      13%, 16% { transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg); }
-      35%, 38% { transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg); }
-      55%      { transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg); }
-    }
-
-    /* Your animation delays need to target the WRAPPER, because wrapper is what's nth-child */
-    .cards .three-d-wrapper:nth-child(2) .card.animated,
-    .cards .three-d-wrapper:nth-child(2) .card.animated::before,
-    .cards .three-d-wrapper:nth-child(2) .card.animated::after { animation-delay: 0.25s; }
-
-    .cards .three-d-wrapper:nth-child(3) .card.animated,
-    .cards .three-d-wrapper:nth-child(3) .card.animated::before,
-    .cards .three-d-wrapper:nth-child(3) .card.animated::after { animation-delay: 0.5s; }
-
-    .cards .three-d-wrapper:nth-child(4) .card.animated,
-    .cards .three-d-wrapper:nth-child(4) .card.animated::before,
-    .cards .three-d-wrapper:nth-child(4) .card.animated::after { animation-delay: 0.75s; }
-
-    /* Eevee special hover */
-    .card.eevee:hover {
-      box-shadow:
-        0 0 30px -5px white,
-        0 0 10px -2px white,
-        0 55px 35px -20px rgba(0, 0, 0, 0.5);
-    }
-
-    .card.eevee:hover::before,
-    .card.eevee.active::before {
+    .card.eevee:hover .card-front::before,
+    .card.eevee.active .card-front::before {
       background-image: linear-gradient(
         115deg,
         transparent 20%,
@@ -322,132 +352,694 @@
         transparent 80%
       );
     }
+
+    .card.animated {
+      transition: none;
+      animation: holoCard 12s ease 0s 1;
+    }
+
+    .card.animated .card-front::before {
+      transition: none;
+      animation: holoGradient 12s ease 0s 1;
+    }
+
+    .card.animated .card-front::after {
+      transition: none;
+      animation: holoSparkle 12s ease 0s 1;
+    }
+
+    .cards .three-d-wrapper:nth-child(2) .card.animated,
+    .cards .three-d-wrapper:nth-child(2) .card.animated .card-front::before,
+    .cards .three-d-wrapper:nth-child(2) .card.animated .card-front::after {
+      animation-delay: 0.25s;
+    }
+
+    .cards .three-d-wrapper:nth-child(3) .card.animated,
+    .cards .three-d-wrapper:nth-child(3) .card.animated .card-front::before,
+    .cards .three-d-wrapper:nth-child(3) .card.animated .card-front::after {
+      animation-delay: 0.5s;
+    }
+
+    .cards .three-d-wrapper:nth-child(4) .card.animated,
+    .cards .three-d-wrapper:nth-child(4) .card.animated .card-front::before,
+    .cards .three-d-wrapper:nth-child(4) .card.animated .card-front::after {
+      animation-delay: 0.75s;
+    }
+
+    @keyframes holoSparkle {
+      0%, 100% {
+        opacity: 0.75;
+        background-position: 50% 50%;
+        filter: brightness(1.2) contrast(1.25);
+      }
+      5%, 8% {
+        opacity: 1;
+        background-position: 40% 40%;
+        filter: brightness(0.8) contrast(1.2);
+      }
+      13%, 16% {
+        opacity: 0.5;
+        background-position: 50% 50%;
+        filter: brightness(1.2) contrast(0.8);
+      }
+      35%, 38% {
+        opacity: 1;
+        background-position: 60% 60%;
+        filter: brightness(1) contrast(1);
+      }
+      55% {
+        opacity: 0.33;
+        background-position: 45% 45%;
+        filter: brightness(1.2) contrast(1.25);
+      }
+    }
+
+    @keyframes holoGradient {
+      0%, 100% {
+        opacity: 0.5;
+        background-position: 50% 50%;
+        filter: brightness(0.5) contrast(1);
+      }
+      5%, 9% {
+        background-position: 100% 100%;
+        opacity: 1;
+        filter: brightness(0.75) contrast(1.25);
+      }
+      13%, 17% {
+        background-position: 0% 0%;
+        opacity: 0.88;
+      }
+      35%, 39% {
+        background-position: 100% 100%;
+        opacity: 1;
+        filter: brightness(0.5) contrast(1);
+      }
+      55% {
+        background-position: 0% 0%;
+        opacity: 1;
+        filter: brightness(0.75) contrast(1.25);
+      }
+    }
+
+    @keyframes holoCard {
+      0%, 100% {
+        transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+      }
+      5%, 8% {
+        transform: rotateZ(0deg) rotateX(6deg) rotateY(-20deg);
+      }
+      13%, 16% {
+        transform: rotateZ(0deg) rotateX(-9deg) rotateY(32deg);
+      }
+      35%, 38% {
+        transform: rotateZ(3deg) rotateX(12deg) rotateY(20deg);
+      }
+      55% {
+        transform: rotateZ(-3deg) rotateX(-12deg) rotateY(-27deg);
+      }
+    }
+
+    .hover {
+      pointer-events: none;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .overlay.open {
+      pointer-events: auto;
+    }
+
+    .clone {
+      position: fixed;
+      margin: 0;
+      border-radius: 5% / 3.5%;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      will-change: left, top, transform;
+      z-index: 10001;
+      box-shadow:
+        -5px -5px 5px -5px var(--color1),
+        5px 5px 5px -5px var(--color2),
+        0 40px 50px -15px rgba(0,0,0,0.65);
+      cursor: pointer;
+    }
+
+    .clone .card-face {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .clone .card-front {
+      background-image: var(--front);
+      transform: rotateY(0deg);
+      background-color: #040712;
+    }
+
+    .clone .card-back {
+      background-image: var(--card-back);
+      transform: rotateY(180deg);
+      background-color: #040712;
+    }
+
+    .clone .card-front::before,
+    .clone .card-front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: inherit;
+      mix-blend-mode: color-dodge;
+    }
+
+    .clone .card-front::before {
+      background-position: var(--clone-grad-x, 50%) var(--clone-grad-y, 50%);
+      background-size: 300% 300%;
+      background-image: linear-gradient(
+        115deg,
+        transparent 0%,
+        var(--color1) 25%,
+        transparent 47%,
+        transparent 53%,
+        var(--color2) 75%,
+        transparent 100%
+      );
+      opacity: 0.75;
+      filter: brightness(0.7) contrast(1.15);
+    }
+
+    .clone .card-front::after {
+      opacity: var(--clone-spark-opacity, 0.9);
+      background-image:
+        url("https://assets.codepen.io/13471/sparkles.gif"),
+        url("https://assets.codepen.io/13471/holo.png"),
+        linear-gradient(
+          125deg,
+          #ff008450 15%,
+          #fca40040 30%,
+          #ffff0030 40%,
+          #00ff8a20 60%,
+          #00cfff40 70%,
+          #cc4cfa50 85%
+        );
+      background-position: var(--clone-spark-x, 50%) var(--clone-spark-y, 50%);
+      background-size: 160%;
+      background-blend-mode: overlay;
+    }
+
+    .close-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 10002;
+      pointer-events: none;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+
+    .close-hint.show {
+      opacity: 0.8;
+    }
   </style>
 
-  <!-- this gets updated by JS for pseudo elements -->
   <style class="hover"></style>
 </head>
-
 <body>
   <main id="app">
     <h1>The March Hotel Card Gallery</h1>
 
     <section class="cards">
-      <div class="three-d-wrapper"><div class="card charizard animated"></div></div>
-      <div class="three-d-wrapper"><div class="card pika animated"></div></div>
-      <div class="three-d-wrapper"><div class="card eevee animated"></div></div>
-      <div class="three-d-wrapper"><div class="card mewtwo animated"></div></div>
+      <div class="three-d-wrapper">
+        <div class="card charizard animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+      
+      <div class="three-d-wrapper">
+        <div class="card pika animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card eevee animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card mewtwo animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card yulan animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card lilian animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card jack animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card aj animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card ayla animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card harmony animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card bat animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+      <div class="three-d-wrapper">
+        <div class="card ran animated">
+          <div class="card-face card-front"></div>
+          <div class="card-face card-back"></div>
+        </div>
+      </div>
+
+
+      
     </section>
-
-<br>
-<br>
-
- <section class="cards">
-      <div class="three-d-wrapper"><div class="card yulan animated"></div></div>
-      <div class="three-d-wrapper"><div class="card lilian animated"></div></div>
-      <div class="three-d-wrapper"><div class="card jack animated"></div></div>
-      <div class="three-d-wrapper"><div class="card aj animated"></div></div>
-    </section>
-
-<br>
-<br>    
-    
-     <section class="cards">
-      <div class="three-d-wrapper"><div class="card mech animated"></div></div>
-      <div class="three-d-wrapper"><div class="card ran animated"></div></div>
-      <div class="three-d-wrapper"><div class="card ayla animated"></div></div>
-      <div class="three-d-wrapper"><div class="card harmony animated"></div></div>
-    </section>
-
-<br>
-<br>    
-    
-         <section class="cards">
-      <div class="three-d-wrapper"><div class="card bat animated"></div></div>
-      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
-      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
-      <div class="three-d-wrapper"><div class="card blank animated"></div></div>
-    </section>
-
-<br>
-<br>    
-    
   </main>
 
+  <div class="overlay"></div>
+  <div class="close-hint">Hover over the centered card to tilt it. Click the card to flip it. Click outside to return.</div>
+
   <script>
-    /*
-      using
-        - an animated gif of sparkles.
-        - an animated gradient as a holo effect.
-        - color-dodge mix blend mode
-    */
-    var x;
-    var $cards = $(".card");
-    var $style = $(".hover");
+    let hoverTimeout;
+    const $cards = $(".cards .card");
+    const $style = $(".hover");
 
-    $cards.on("mousemove touchmove", function(e) {
-      var isTouch = (e.type === "touchmove");
-      var pos;
+    $cards.on("mousemove touchmove", function (e) {
+      if ($("body").hasClass("zoom-active")) return;
 
-      if (isTouch) {
-        pos = [ e.touches[0].clientX, e.touches[0].clientY ];
-      } else {
-        pos = [ e.offsetX, e.offsetY ];
-      }
+      const isTouch = e.type === "touchmove";
+      let pos = [e.offsetX, e.offsetY];
 
       e.preventDefault();
 
-      var $card = $(this);
+      if (isTouch) {
+        pos = [e.touches[0].clientX, e.touches[0].clientY];
+      }
 
-      var l = pos[0];
-      var t = pos[1];
-      var h = $card.height();
-      var w = $card.width();
+      const $card = $(this);
+      const l = pos[0];
+      const t = pos[1];
+      const h = $card.height();
+      const w = $card.width();
 
-      var px = Math.abs(Math.floor(100 / w * l) - 100);
-      var py = Math.abs(Math.floor(100 / h * t) - 100);
-      var pa = (50 - px) + (50 - py);
+      const px = Math.abs(Math.floor(100 / w * l) - 100);
+      const py = Math.abs(Math.floor(100 / h * t) - 100);
+      const pa = (50 - px) + (50 - py);
 
-      var lp = (50 + (px - 50) / 1.5);
-      var tp = (50 + (py - 50) / 1.5);
+      const lp = 50 + (px - 50) / 1.5;
+      const tp = 50 + (py - 50) / 1.5;
+      const pxSpark = 50 + (px - 50) / 7;
+      const pySpark = 50 + (py - 50) / 7;
+      const opacity = 20 + Math.abs(pa) * 1.5;
 
-      var px_spark = (50 + (px - 50) / 7);
-      var py_spark = (50 + (py - 50) / 7);
+      const ty = ((tp - 50) / 2.2) * -1;
+      const tx = ((lp - 50) / 2.0) * 0.5;
 
-      var p_opc = 20 + (Math.abs(pa) * 1.5);
-      var ty = ((tp - 50) / 2) * -1;
-      var tx = ((lp - 50) / 1.5) * 0.5;
+      const gradPos = `background-position: ${lp}% ${tp}%;`;
+      const sparkPos = `background-position: ${pxSpark}% ${pySpark}%;`;
+      const opc = `opacity: ${opacity / 100};`;
+      const tf = `transform: rotateX(${ty}deg) rotateY(${tx}deg);`;
 
-      var tf = `transform: rotateX(${ty}deg) rotateY(${tx}deg);`;
-      var grad_pos = `background-position: ${lp}% ${tp}%;`;
-      var sprk_pos = `background-position: ${px_spark}% ${py_spark}%;`;
-      var opc = `opacity: ${p_opc / 100};`;
-
-      // IMPORTANT FIX:
-      // Only style the active card's pseudo elements, not ".card:hover" globally.
       $cards.removeClass("active");
       $card.addClass("active").removeClass("animated");
       $card.attr("style", tf);
 
-      var style = `
-        .card.active::before { ${grad_pos} }
-        .card.active::after  { ${sprk_pos} ${opc} }
+      const style = `
+        .cards .card.active .card-front::before { ${gradPos} }
+        .cards .card.active .card-front::after { ${sparkPos} ${opc} }
       `;
       $style.html(style);
 
       if (isTouch) return false;
-      clearTimeout(x);
+      clearTimeout(hoverTimeout);
+    }).on("mouseout touchend touchcancel", function () {
+      if ($("body").hasClass("zoom-active")) return;
 
-    }).on("mouseout touchend touchcancel", function() {
-      var $card = $(this);
+      const $card = $(this);
       $style.html("");
       $card.removeClass("active");
       $card.removeAttr("style");
 
-      x = setTimeout(function() {
+      hoverTimeout = setTimeout(function () {
         $card.addClass("animated");
       }, 2500);
     });
+
+    (function () {
+      const $overlay = $(".overlay");
+      const $hint = $(".close-hint");
+
+      let $activeClone = null;
+      let $originCard = null;
+      let isOpen = false;
+      let isAnimating = false;
+      let isBackShowing = false;
+      let currentScale = 1;
+
+      let previewTiltX = 0;
+      let previewTiltY = 0;
+
+      function getCenteredSize() {
+        const width = Math.min(window.innerWidth * 0.78, 420);
+        const height = width * 1.4;
+        return { width, height };
+      }
+
+      function setCloneCenterState($clone, centerX, centerY, width, height) {
+        $clone.css({
+          left: centerX + "px",
+          top: centerY + "px",
+          width: width + "px",
+          height: height + "px"
+        });
+      }
+
+      function getBaseRotation() {
+        return isBackShowing ? 900 : 720;
+      }
+
+      function getTransform(rotX, rotY, scale) {
+        return `translate(-50%, -50%) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(${scale})`;
+      }
+
+      function applyPreviewTilt() {
+        if (!$activeClone) return;
+
+        $activeClone.css({
+          transform: getTransform(
+            previewTiltX,
+            getBaseRotation() + previewTiltY,
+            currentScale
+          )
+        });
+      }
+
+      function updateCloneHolo(clientX, clientY) {
+        if (!$activeClone || !isOpen) return;
+
+        const rect = $activeClone[0].getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        const px = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        const py = Math.max(0, Math.min(100, (y / rect.height) * 100));
+
+        const lp = 50 + (px - 50) / 1.5;
+        const tp = 50 + (py - 50) / 1.5;
+        const pxSpark = 50 + (px - 50) / 7;
+        const pySpark = 50 + (py - 50) / 7;
+        const pa = (50 - px) + (50 - py);
+        const opacity = (20 + Math.abs(pa) * 1.5) / 100;
+
+        const front = $activeClone.find(".card-front")[0];
+        if (!front) return;
+
+        front.style.setProperty("--clone-grad-x", `${lp}%`);
+        front.style.setProperty("--clone-grad-y", `${tp}%`);
+        front.style.setProperty("--clone-spark-x", `${pxSpark}%`);
+        front.style.setProperty("--clone-spark-y", `${pySpark}%`);
+        front.style.setProperty("--clone-spark-opacity", opacity);
+      }
+
+      function resetCloneHolo() {
+        if (!$activeClone) return;
+        const front = $activeClone.find(".card-front")[0];
+        if (!front) return;
+
+        front.style.setProperty("--clone-grad-x", "50%");
+        front.style.setProperty("--clone-grad-y", "50%");
+        front.style.setProperty("--clone-spark-x", "50%");
+        front.style.setProperty("--clone-spark-y", "50%");
+        front.style.setProperty("--clone-spark-opacity", "0.9");
+      }
+
+      function createCloneFromCard($card) {
+        const classNames = ($card.attr("class") || "")
+          .replace(/\bactive\b/g, "")
+          .replace(/\banimated\b/g, "")
+          .trim();
+
+        const $clone = $(`
+          <div class="clone ${classNames}">
+            <div class="card-face card-front"></div>
+            <div class="card-face card-back"></div>
+          </div>
+        `);
+
+        $clone.css({
+          "--color1": getComputedStyle($card[0]).getPropertyValue("--color1"),
+          "--color2": getComputedStyle($card[0]).getPropertyValue("--color2"),
+          "--front": getComputedStyle($card[0]).getPropertyValue("--front"),
+          "--card-back": getComputedStyle(document.documentElement).getPropertyValue("--card-back")
+        });
+
+        return $clone;
+      }
+      
+           
+      function openCard($card) {
+        if (isOpen || isAnimating) return;
+
+        isAnimating = true;
+        isBackShowing = false;
+        previewTiltX = 0;
+        previewTiltY = 0;
+        $originCard = $card;
+
+        const rect = $card[0].getBoundingClientRect();
+        const originCenterX = rect.left + rect.width / 2;
+        const originCenterY = rect.top + rect.height / 2;
+
+        const viewportCenterX = window.innerWidth / 2;
+        const viewportCenterY = window.innerHeight / 2;
+
+        const centered = getCenteredSize();
+        const scaleX = centered.width / rect.width;
+        const scaleY = centered.height / rect.height;
+        currentScale = Math.min(scaleX, scaleY);
+
+        const $clone = createCloneFromCard($card);
+        $activeClone = $clone;
+
+        setCloneCenterState($clone, originCenterX, originCenterY, rect.width, rect.height);
+        $clone.css({
+          transform: getTransform(0, 0, 1)
+        });
+
+        $overlay.empty().append($clone).addClass("open");
+        $("body").addClass("zoom-active");
+        $card.css("visibility", "hidden");
+
+        resetCloneHolo();
+
+        $clone[0].offsetHeight;
+
+        setCloneCenterState($clone, viewportCenterX, viewportCenterY, rect.width, rect.height);
+        $clone.css({
+          transition: "left 1.15s cubic-bezier(.22,.61,.36,1), top 1.15s cubic-bezier(.22,.61,.36,1), transform 1.15s cubic-bezier(.22,.61,.36,1)",
+          transform: getTransform(0, 720, currentScale)
+        });
+
+        setTimeout(() => {
+          if (!$activeClone) return;
+          isOpen = true;
+          isAnimating = false;
+          $hint.addClass("show");
+
+          $activeClone.css({
+            transition: "transform 0.08s linear"
+          });
+        }, 1200);
+      }
+
+      function flipCard() {
+        if (!isOpen || isAnimating || !$activeClone) return;
+
+        isAnimating = true;
+        isBackShowing = !isBackShowing;
+
+        $activeClone.css({
+          transition: "transform 0.6s cubic-bezier(.22,.61,.36,1)"
+        });
+
+        applyPreviewTilt();
+
+        setTimeout(() => {
+          if (!$activeClone) return;
+          isAnimating = false;
+          $activeClone.css({
+            transition: "transform 0.08s linear"
+          });
+        }, 650);
+      }
+
+      function closeCard() {
+        if (!isOpen || isAnimating || !$activeClone || !$originCard) return;
+
+        isAnimating = true;
+        previewTiltX = 0;
+        previewTiltY = 0;
+        $hint.removeClass("show");
+
+        const rect = $originCard[0].getBoundingClientRect();
+        const originCenterX = rect.left + rect.width / 2;
+        const originCenterY = rect.top + rect.height / 2;
+
+        setCloneCenterState($activeClone, originCenterX, originCenterY, rect.width, rect.height);
+        $activeClone.css({
+          transition: "left 0.95s cubic-bezier(.22,.61,.36,1), top 0.95s cubic-bezier(.22,.61,.36,1), transform 0.95s cubic-bezier(.22,.61,.36,1)",
+          transform: getTransform(0, 0, 1)
+        });
+
+        setTimeout(() => {
+          if ($originCard) $originCard.css("visibility", "");
+          if ($activeClone) $activeClone.remove();
+
+          $overlay.empty().removeClass("open");
+          $activeClone = null;
+          $originCard = null;
+          isOpen = false;
+          isAnimating = false;
+          isBackShowing = false;
+          $("body").removeClass("zoom-active");
+        }, 1000);
+      }
+
+      $(document).on("click", ".cards .card", function (e) {
+        if (isOpen || isAnimating) return;
+        e.preventDefault();
+        openCard($(this));
+      });
+
+      $overlay.on("mousemove", ".clone", function (e) {
+        if (!isOpen || isAnimating || !$activeClone) return;
+
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const px = (x / rect.width) - 0.5;
+        const py = (y / rect.height) - 0.5;
+
+        previewTiltY = px * 50;
+        previewTiltX = -py * 50;
+
+        $activeClone.css({
+          transition: "transform 0.08s linear"
+        });
+
+        applyPreviewTilt();
+        updateCloneHolo(e.clientX, e.clientY);
+      });
+
+      $overlay.on("mouseleave", ".clone", function () {
+        if (!isOpen || isAnimating || !$activeClone) return;
+
+        previewTiltX = 0;
+        previewTiltY = 0;
+
+        $activeClone.css({
+          transition: "transform 0.2s ease"
+        });
+
+        applyPreviewTilt();
+        resetCloneHolo();
+      });
+
+      $overlay.on("click", ".clone", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        flipCard();
+      });
+
+      $overlay.on("click", function (e) {
+        if (!isOpen || isAnimating) return;
+        if ($(e.target).closest(".clone").length === 0) {
+          closeCard();
+        }
+      });
+
+      $(document).on("keydown", function (e) {
+        if (e.key === "Escape" && isOpen) {
+          closeCard();
+        }
+      });
+
+      $(window).on("resize", function () {
+        if (!isOpen || !$activeClone) return;
+
+        const centered = getCenteredSize();
+        setCloneCenterState(
+          $activeClone,
+          window.innerWidth / 2,
+          window.innerHeight / 2,
+          centered.width,
+          centered.height
+        );
+
+        currentScale = 1;
+        $activeClone.css({
+          transition: "none"
+        });
+        applyPreviewTilt();
+      });
+    })();
   </script>
 </body>
 </html>
