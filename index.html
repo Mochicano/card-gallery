@@ -91,6 +91,21 @@
       --destiny1: #54a29e;
       --destiny2: #a79d66;
       --destinyfront: url(https://i.pinimg.com/736x/08/b7/98/08b7985e3e577f186f225f1caa84cc06.jpg);
+
+      --ent1: #54a29e;
+      --ent2: #a79d66;
+      --entfront: url(https://i.pinimg.com/736x/68/7d/02/687d02dc8d99ca71fee234c42f3bba0a.jpg);
+
+      --sa1: #54a29e;
+      --sat2: #a79d66;
+      --safront: url(https://i.pinimg.com/736x/93/fd/0f/93fd0f9288a014537713324d29eaac11.jpg);
+
+
+
+
+
+
+      
     }
 
     * {
@@ -312,6 +327,18 @@
       --front: var(--destinyfront);
       --color1: var(--destiny1);
       --color2: var(--destiny2);
+    }
+
+    .card.ent {
+      --front: var(--entfront);
+      --color1: var(--ent1);
+      --color2: var(--ent2);
+    }
+
+    .card.sa {
+      --front: var(--safront);
+      --color1: var(--sa1);
+      --color2: var(--sa2);
     }
     
 
@@ -787,14 +814,14 @@
       </div>
 
       <div class="three-d-wrapper">
-        <div class="card blank animated">
+        <div class="card ent animated">
           <div class="card-face card-front"></div>
           <div class="card-face card-back"></div>
         </div>
       </div>
 
       <div class="three-d-wrapper">
-        <div class="card blank animated">
+        <div class="card sa animated">
           <div class="card-face card-front"></div>
           <div class="card-face card-back"></div>
         </div>
