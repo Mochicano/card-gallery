@@ -124,9 +124,9 @@
       --sta2: #a79d66;
       --stafront: url(https://i.pinimg.com/736x/90/ea/2b/90ea2b11f7abcf2bb0ff32b8787e3235.jpg);
 
-      --st1: #54a29e;
-      --st2: #a79d66;
-      --stfront: url(https://i.pinimg.com/736x/49/98/91/4998915e9d3c78f30169e8c446933c3e.jpg);
+      --fl1: #54a29e;
+      --fl2: #a79d66;
+      --flfront: url(https://i.pinimg.com/736x/b8/7f/55/b87f557d2355b4a3f5af63ad5cfc5b3d.jpg);
 
       --st1: #54a29e;
       --st2: #a79d66;
@@ -402,6 +402,12 @@
       --front: var(--stafront);
       --color1: var(--sta1);
       --color2: var(--sta2);
+    }
+
+    .card.fl {
+      --front: var(--flfront);
+      --color1: var(--fl1);
+      --color2: var(--fl2);
     }
     
 
@@ -936,7 +942,7 @@
       </div>
 
       <div class="three-d-wrapper">
-        <div class="card blank animated">
+        <div class="card fl animated">
           <div class="card-face card-front"></div>
           <div class="card-face card-back"></div>
         </div>
